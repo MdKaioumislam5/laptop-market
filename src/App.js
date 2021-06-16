@@ -1,25 +1,74 @@
 import logo from './logo.svg';
+import React, { createContext, useState } from 'react';
 import './App.css';
+// import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Home from './components/Home/Home';
+import AddEvents from './components/AddEvents/AddEvents';
+import Login from './components/Login/Login';
+import Book from './components/Book/Book';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+
+export const UserContext = createContext();
 
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState({});
+  console.log('loggedInUser', loggedInUser);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
+      <Router>
+        <div>
+          <nav className="nav">
+            <ul>
+              <li>
+                <Link to="/home">Home</Link>
+              </li>
+              <li>
+                <Link to="/addEvents">Add Event</Link>
+              </li>
+              <li>
+                <Link to="/dashboard">Dashboard</Link>
+              </li>
+              <li>
+                <Link to="/book">Book</Link>
+              </li>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+            </ul>
+          </nav>
+
+          <hr />
+
+          <Switch>
+            <Route path="/home">
+              <Home />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <PrivateRoute path="/book/:bookType">
+              <Book />
+            </PrivateRoute>
+            <Route path="/addEvents">
+              <AddEvents />
+            </Route>
+            <Route path="/dashboard">
+            </Route>
+            <Route exact path="/">
+              <Home />
+            </Route>
+
+          </Switch>
+        </div>
+      </Router>
+    </UserContext.Provider >
+
   );
 }
-
 export default App;
