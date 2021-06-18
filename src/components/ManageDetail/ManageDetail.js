@@ -8,7 +8,6 @@ const ManageDetail = (props) => {
     const handleDelete = (id) => {
         fetch(`https://quiet-escarpment-26801.herokuapp.com/deleteProduct/${id}`,{
             method: 'Delete',
-
         })
         .then(res => res.json())
         .then(data => {
