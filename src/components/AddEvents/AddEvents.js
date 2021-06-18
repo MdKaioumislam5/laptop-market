@@ -7,17 +7,17 @@ const AddEvents = (product) => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [imageURL, setIMageURL] = useState(null);
 
-  const deleteComponets = ( id ) => {
-    console.log('deleteComponets');
-    // const {id} = useParams( );
-    // console.log(id)
-    // useEffect(() =>{
-    //     fetch(`http://localhost:5000/deleteComponets/${id}`)
-    //     .then( res => res.json())
-    //     .then(data => setProduct(data))
-    // }, [id])
-    
+  function deleteProduct(id) {
+    console.log(id);
+    fetch(`/delete/${id}`,{
+      method: 'DELETE'
+    })
+    .then(res => res.json())
+    .then(result =>{
+      console.log('delete successfully')
+    })
   }
+  
 
   const onSubmit = data => {
     const eventData = {
@@ -26,7 +26,7 @@ const AddEvents = (product) => {
       imageURL: imageURL,
     };
 
-    const url = `http://localhost:5000/addEvent`
+    const url = `https://quiet-escarpment-26801.herokuapp.com/addEvent`
     console.log(eventData)
     fetch(url, {
       method: 'POST',
@@ -66,9 +66,10 @@ const AddEvents = (product) => {
         <input type="file" onChange={handleImageUpload} />
         <br />
         <input type="submit" />
-        <button type="button" onClick={() => deleteComponets(product._id)}>Delete</button>
+       
 
       </form>
+      <button onClick= {() => deleteProduct(`${product._id}`)}>Delete</button>
     
 
     </div>

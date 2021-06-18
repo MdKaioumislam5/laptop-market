@@ -10,28 +10,11 @@ const Book = ({ event }) => {
     const handleCheckOut = () => {
         
         alert('ordered confirmed successfully');
-        // fetch('https://evening-fjord-37236.herokuapp.com/', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({
-        //         name: product.name,
-        //         price: product.price,
-        //         username: loggedInUser.name,
-        //         email: loggedInUser.email
-               
-        //     })
-        // })
-        //     .then(() => {
-        //         history.push('/product')
-        //         const newloggedInUser = { ...loggedInUser, orderDate: new Date() }
-        //         setLoggedInUser(newloggedInUser)
-        //         console.log(newloggedInUser)
-        //     })
     }
     const {bookType } = useParams();
     console.log(bookType)
     useEffect(() =>{
-        fetch(`http://localhost:5000/product/${bookType}`)
+        fetch(`https://quiet-escarpment-26801.herokuapp.com/product/${bookType}`)
         .then( res => res.json())
         .then(data => setProduct(data))
     }, [bookType])

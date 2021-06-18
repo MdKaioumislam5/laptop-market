@@ -1,7 +1,6 @@
 import logo from './logo.svg';
 import React, { createContext, useState } from 'react';
 import './App.css';
-// import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,6 +12,10 @@ import AddEvents from './components/AddEvents/AddEvents';
 import Login from './components/Login/Login';
 import Book from './components/Book/Book';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import LaptopMarket from './components/LaptopMarket/LaptopMarket';
+import ManageProducts from './components/ManageProducts/ManageProducts';
+ 
+
 
 export const UserContext = createContext();
 
@@ -26,6 +29,9 @@ function App() {
           <nav className="nav">
             <ul>
               <li>
+                <Link to="/laptop">LaptopMarket</Link>
+              </li>
+              <li>
                 <Link to="/home">Home</Link>
               </li>
               <li>
@@ -35,10 +41,13 @@ function App() {
                 <Link to="/dashboard">Dashboard</Link>
               </li>
               <li>
-                <Link to="/book">Book</Link>
+                <Link to="/event">Book</Link>
               </li>
               <li>
                 <Link to="/login">Login</Link>
+              </li>
+              <li>
+                <Link to="/manageProducts">Manage Products</Link>
               </li>
             </ul>
           </nav>
@@ -58,7 +67,11 @@ function App() {
             <Route path="/addEvents">
               <AddEvents />
             </Route>
-            <Route path="/dashboard">
+            <Route path="/laptop">
+              <LaptopMarket />
+            </Route>
+            <Route path="/manageProducts">
+              <ManageProducts/>
             </Route>
             <Route exact path="/">
               <Home />
@@ -68,7 +81,6 @@ function App() {
         </div>
       </Router>
     </UserContext.Provider >
-
   );
 }
 export default App;
